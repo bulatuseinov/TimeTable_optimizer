@@ -1,0 +1,4 @@
+django==2.1.7
+django-bootstrap-form==3.3
+django-crispy-forms
+pandas

@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static "bootstrap/css/bootstrap.min.css" %}">
+    {% block styles %}{% endblock %}
+
+    <script type="text/javascript" src="{% static "jquery/jquery-3.3.1.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+    {% block scripts %}{% endblock %}
+</head>
+<body>
+<div>
+    {% block nav %}
+            <nav class="navigation navbar navbar-expand-lg sticky-top navbar-light shadow-lg " style="background-color:#9261ff;">
+              <img src="{% static "/imgs/o.png" %}"><a class=" brand navbar-brand" href="/">PTIMIZER</a>
+
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"> Главная </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about"> О проекте </a>
+                    </li>
+                    <a class="btn btn-lg d-lg-inline-block btn-outline-warning mb-3 shadow"  href="/input" > OPTIMIZE!</a>
+
+                </ul>
+                  <ul class="navbar-nav ml-auto">
+
+                      <li class="nav-item m-2">
+                          <a href="https://mipt.ru" target="_blank"><img src="{% static "/imgs/cap.png" %}"></a>
+                      </li>
+
+                      <li class="nav-item m-2">
+                          <a href="https://github.com/bulatuseinov/" target="_blank"><img src="{% static "/imgs/github.png" %}" ></a>
+                      </li>
+
+                  </ul>
+
+              </div>
+            </nav>
+    {% endblock %}
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

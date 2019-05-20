@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Input{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'tt/css/index.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+        <div class = "container">
+        <form id = "input_form", class="form", method = "post">
+          {% csrf_token %}
+          <h5>Регистрация:</h5>
+          <div class="form-group row">
+            <label for="group" class="col-sm-2 col-form-label">Группа</label>
+            <div class="col-sm-10">
+              <select class="form-control" id="group" name="group">
+                  <option selected>Выберите группу... </option>
+                  <option>771</option>
+                  <option>772</option>
+                  <option>773</option>
+                  <option>774</option>
+                  <option>775</option>
+                  <option>776</option>
+                  <option>777</option>
+                  <option>778</option>
+                  <option>779</option>
+              </select>
+            </div>
+          </div>
+          <hr/>
+          <h5>Рейтинги преподавателей:</h5>
+          <div class="form-group row">
+            <label for="Knowledge" class="col-sm-2 col-form-label">Knowledge</label>
+            <div class="col-sm-10">
+              <input type="range" class="custom-range" name="Knowledge" min="0" max="1" step="0.01" id="Knowledge">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="Skill" class="col-sm-2 col-form-label">Skill</label>
+            <div class="col-sm-10">
+              <input type="range" class="custom-range" name="Skill" min="0" max="1" step="0.01" id="Skill">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="Social" class="col-sm-2 col-form-label">Social</label>
+            <div class="col-sm-10">
+              <input type="range" class="custom-range" name="Social" min="0" max="1" step="0.01" id="Social">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="Loyality" class="col-sm-2 col-form-label">Loyality</label>
+            <div class="col-sm-10">
+              <input type="range" class="custom-range" name="Loyality" min="0" max="1" step="0.01" id="Loyality">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="Total" class="col-sm-2 col-form-label">Total</label>
+            <div class="col-sm-10">
+              <input type="range" class="custom-range" name="Total" min="0" max="1" step="0.01" id="Total">
+            </div>
+          </div>
+          <hr/>
+          <h5>Пары:</h5>
+
+
+          <hr/>
+          <h5>Свободные дни:</h5>
+          <fieldset class="form-group">
+            <div class="form-row">
+              <legend class="col-form-label col-sm-2 pt-0">Дни</legend>
+              <div class="col-sm-10">
+                <div class="form-check ">
+                  <input class="form-check-input form-check-inline" type="checkbox" name="monday" id="monday" value="1">
+                  <label class="form-check-label" for="monday">
+                    Понедельник
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input form-check-inline" type="checkbox" name="tuesday" id="tuesday" value="2">
+                  <label class="form-check-label" for="tuesday">
+                    Вторник
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input form-check-inline" type="checkbox" name="wednesday" id="wednesday" value="3">
+                  <label class="form-check-label" for="wednesday">
+                    Среда
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input form-check-inline" type="checkbox" name="thursday" id="thursday" value="4">
+                  <label class="form-check-label" for="thursday">
+                    Четверг
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input form-check-inline" type="checkbox" name="friday" id="friday" value="5">
+                  <label class="form-check-label" for="friday">
+                    Пятница
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input form-check-inline" type="checkbox" name="saturday" id="saturday" value="6">
+                  <label class="form-check-label" for="saturday">
+                    Суббота
+                  </label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+            <hr/>
+          <h5>Окна:</h5>
+          <div class="form-group row">
+            <label for="windows" class="col-sm-2 col-form-label">Важность окон</label>
+            <div class="col-sm-10 m-1">
+              <input type="range" class="custom-range" name="windows" min="0" max="1" step="0.01" id="windows">
+            </div>
+          </div>
+            <hr/>
+          <h5>Время:</h5>
+            <label for="time" class="col-sm-2 col-form-label">Важность</label>
+            <div class="col-sm-10 mb-3">
+              <input type="range" class="custom-range" name="time" min="0" max="1" step="0.01" id="time">
+            </div>
+            <hr/>
+          <div class="form-row">
+            <div class="form-row col-md-4">
+                <div class="col-sm-10">
+                  <select class="form-control" id="start" name="start">
+                      <option value="1">Выберите время начала...</option>
+                      <option value = "1">Начинать раньше</option>
+                      <option value = "-1">Начинать позже</option>
+                  </select>
+                </div>
+            </div>
+            <div class="form_row col-mb-8" >
+                <div class="form-check ">
+                  <input class="form-check-input form-check-inline" type="checkbox" name="monday_start" id="monday_start" value="1">
+                  <label class="form-check-label" for="monday_start">
+                    Понедельник
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input form-check-inline" type="checkbox" name="tuesday_start" id="tuesday_start" value="2">
+                  <label class="form-check-label" for="tuesday_start">
+                    Вторник
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input form-check-inline" type="checkbox" name="wednesday_start" id="wednesday_start" value="3">
+                  <label class="form-check-label" for="wednesday_start">
+                    Среда
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input form-check-inline" type="checkbox" name="thursday_start" id="thursday_start" value="4">
+                  <label class="form-check-label" for="thursday_start">
+                    Четверг
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input form-check-inline" type="checkbox" name="friday_start" id="friday_start" value="5">
+                  <label class="form-check-label" for="friday_start">
+                    Пятница
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input form-check-inline" type="checkbox" name="saturday_start" id="saturday_start" value="6">
+                  <label class="form-check-label" for="saturday_start">
+                    Суббота
+                  </label>
+                </div>
+            </div>
+
+          </div>
+            <hr/>
+          <div class="form-row">
+            <div class="form-row col-md-4">
+                <div class="col-sm-10">
+                  <select class="form-control" id="end" name="end" aria-label="as">
+                      <option value="1"> Выберите время окончания...</option>
+                      <option value = "1">Заканчивать раньше</option>
+                      <option value = "-1">Заканчивать позже</option>
+                  </select>
+                </div>
+            </div>
+            <div class="form_row col-mb-8" >
+                <div class="form-check ">
+                  <input class="form-check-input " type="checkbox" name="monday_end" id="monday_end" value="1">
+                  <label class="form-check-label" for="monday_end">
+                    Понедельник
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input " type="checkbox" name="tuesday_end" id="tuesday_end" value="2">
+                  <label class="form-check-label" for="tuesday_end">
+                    Вторник
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input " type="checkbox" name="wednesday_end" id="wednesday_end" value="3">
+                  <label class="form-check-label" for="wednesday_end">
+                    Среда
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input " type="checkbox" name="thursday_end" id="thursday_end" value="4">
+                  <label class="form-check-label" for="thursday_end">
+                    Четверг
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="friday_end" id="friday_end" value="5">
+                  <label class="form-check-label" for="friday_end">
+                    Пятница
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="saturday_end" id="saturday_end" value="6">
+                  <label class="form-check-label" for="saturday_end">
+                    Суббота
+                  </label>
+                </div>
+            </div>
+
+          </div>
+
+              <button type="submit" class="btn btn-primary mb-lg-5">Submit</button>
+            </div>
+          </div>
+        </form>
+    </div>
+
+        {{filename}}
+        {{group}}
+        {{Knowledge}}
+        {{Skill}}
+        {{Social}}
+        {{Loyality}}
+        {{Total}}
+        {{days}}
+     {{ windows }}
+
+
+        {{time}}
+        {{start}}
+        {{days_start}}
+        {{end}}
+        {{days_end}}
+
+{% endblock %}

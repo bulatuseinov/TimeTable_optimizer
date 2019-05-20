@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}OPTI Home page{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'tt/css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% include "tt/info.html" %}
+    </div>
+{% endblock %}
