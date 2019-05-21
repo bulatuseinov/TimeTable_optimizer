@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 import subprocess
 import pandas as pd
+import csv
 
 
 def index(request):
@@ -45,11 +46,30 @@ class Inputform(View):
         thursday_end = request.POST.get("thursday_end")
         friday_end = request.POST.get("friday_end")
         saturday_end = request.POST.get("saturday_end")
+        mon = [request.POST.get(str("mon" + str(i))) for i in range(1, 8)]
+        tue = [request.POST.get(str("tue" + str(i))) for i in range(1, 8)]
+        wed = [request.POST.get(str("wed" + str(i))) for i in range(1, 8)]
+        thu = [request.POST.get(str("thu" + str(i))) for i in range(1, 8)]
+        fri = [request.POST.get(str("fri" + str(i))) for i in range(1, 8)]
+        sat = [request.POST.get(str("sat" + str(i))) for i in range(1, 8)]
 
         import time
         filename = str(int(time.time() * 10**6))
         filename_path = "tt/static/files/" + filename + ".csv"
-        print("filename = ", filename)
+
+        def MakeStrFromPairs(day):
+            string = ''
+            for pair in day:
+                if pair is not None:
+                    string += str(pair)
+            return string
+
+        mond, tues, wedn, thur, frid, satu = list(map(MakeStrFromPairs, [mon, tue, wed, thu, fri, sat]))
+
+        pairs = mond + tues + wedn + thur + frid + satu
+
+        if len(pairs) == 0:
+            pairs = "0"
 
         days_1 = [monday, tuesday, wednesday, thursday, friday, saturday]
         days = ''
@@ -83,35 +103,39 @@ class Inputform(View):
             filename_path, sep=";",
             header=None, names=columns)
 
+        list_days = ["Понедельник"] + [" "]*6 + ["Вторник"] + [" "] *6 + ["Среда"] + [" "] *6 + ["Четверг"] + [" "] *6 + ["Пятница"] + [" "] *6 + ["Суббота"] + [" "] *6
+        df['День'] = list_days
+
+        columns = df.columns.to_list()
+        columns = columns[-1:] + columns[:-1]
+        columns = columns[-1:] + columns[:-1]
+        columns[0], columns[1] = columns[1], columns[0]
+        df = df[columns]
+        df = df.fillna("-")
+        # df.set_index(["День"], inplace=True)
+
         filename_html = "tt/templates/tt/" + filename + ".html"
         f = open(filename_html, 'w')
-        a = df.to_html()
+        a = df.to_html(justify="center")
         f.write(a)
         f.close()
+        f = open(filename_html)
+        lines = f.readlines()
+        f.close()
+        f = open(filename_html, 'w')
+        f.writelines([line for line in lines[1:-1]])
+        f.close()
 
-        context = {
-            "filename" : filename_path,
-            "group" : group,
-            "windows": windows,
-            "Knowledge" : Knowledge,
-            "Skill" : Skill,
-            "Social" : Social,
-            "Loyality": Loyality,
-            "Total" : Total,
-            "days" : days,
-            "start": start,
-            "end": end,
-            "days_start" : days_start,
-            "days_end" : days_end,
-            "time" : time_t
-            }
-
-        print(context)
 
         filename_html_1 = "tt/" + filename + ".html"
 
+        context = {
+            "filename" : filename_html_1,
+            "group" : group
+        }
 
 
-        return render(request, filename_html_1)
+
+        return render(request, "tt/output.html", context)
 
 

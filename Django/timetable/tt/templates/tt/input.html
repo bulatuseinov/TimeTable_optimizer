@@ -12,14 +12,13 @@
 {% block content %}
 
         <div class = "container">
-        <form id = "input_form", class="form", method = "post">
+        <form id = "input_form" class="form" method = "post" novalidate>
           {% csrf_token %}
           <h5>Регистрация:</h5>
           <div class="form-group row">
             <label for="group" class="col-sm-2 col-form-label">Группа</label>
             <div class="col-sm-10">
-              <select class="form-control" id="group" name="group">
-                  <option selected>Выберите группу... </option>
+              <select class="form-control" id="group" name="group" required>
                   <option>771</option>
                   <option>772</option>
                   <option>773</option>
@@ -35,25 +34,25 @@
           <hr/>
           <h5>Рейтинги преподавателей:</h5>
           <div class="form-group row">
-            <label for="Knowledge" class="col-sm-2 col-form-label">Knowledge</label>
+            <label for="Knowledge" class="col-sm-2 col-form-label">Знания</label>
             <div class="col-sm-10">
               <input type="range" class="custom-range" name="Knowledge" min="0" max="1" step="0.01" id="Knowledge">
             </div>
           </div>
           <div class="form-group row">
-            <label for="Skill" class="col-sm-2 col-form-label">Skill</label>
+            <label for="Skill" class="col-sm-2 col-form-label">Умение преподавать</label>
             <div class="col-sm-10">
               <input type="range" class="custom-range" name="Skill" min="0" max="1" step="0.01" id="Skill">
             </div>
           </div>
           <div class="form-group row">
-            <label for="Social" class="col-sm-2 col-form-label">Social</label>
+            <label for="Social" class="col-sm-2 col-form-label">В общении</label>
             <div class="col-sm-10">
               <input type="range" class="custom-range" name="Social" min="0" max="1" step="0.01" id="Social">
             </div>
           </div>
           <div class="form-group row">
-            <label for="Loyality" class="col-sm-2 col-form-label">Loyality</label>
+            <label for="Loyality" class="col-sm-2 col-form-label">Халявность</label>
             <div class="col-sm-10">
               <input type="range" class="custom-range" name="Loyality" min="0" max="1" step="0.01" id="Loyality">
             </div>
@@ -65,7 +64,205 @@
             </div>
           </div>
           <hr/>
-          <h5>Пары:</h5>
+          <h5>Освободить пары:</h5>
+            <div class="form-row">
+              <legend class="col-form-label col-sm-2 pt-0">Понедельник</legend>
+              <div class="col-sm-10">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="mon1" name="mon1" value="11">
+                      <label class="form-check-label" for="mon1">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="mon2" name="mon2" value="12">
+                      <label class="form-check-label" for="mon2">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="mon3" name="mon3" value="13">
+                      <label class="form-check-label" for="mon3">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="mon4" name="mon4" value="14">
+                      <label class="form-check-label" for="mon4">4</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="mon5" name="mon5" value="15">
+                      <label class="form-check-label" for="mon5">5</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="mon6" name="mon6" value="16">
+                      <label class="form-check-label" for="mon6">6</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="mon7" name="mon7" value="17">
+                      <label class="form-check-label" for="mon7">7</label>
+                    </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <legend class="col-form-label col-sm-2 pt-0">Вторник</legend>
+              <div class="col-sm-10">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="tue1" name="tue1" value="21">
+                      <label class="form-check-label" for="tue1">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="tue2" name="tue2" value="22">
+                      <label class="form-check-label" for="tue2">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="tue3" name="tue3" value="23">
+                      <label class="form-check-label" for="tue3">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="tue4" name="tue4" value="24">
+                      <label class="form-check-label" for="tue4">4</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="tue5" name="tue5" value="25">
+                      <label class="form-check-label" for="tue5">5</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="tue6" name="tue6" value="26">
+                      <label class="form-check-label" for="tue6">6</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="tue7" name="tue7" value="27">
+                      <label class="form-check-label" for="tue7">7</label>
+                    </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <legend class="col-form-label col-sm-2 pt-0">Среда</legend>
+              <div class="col-sm-10">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="wed1" name="wed1" value="31">
+                      <label class="form-check-label" for="wed1">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="wed2" name="wed2" value="32">
+                      <label class="form-check-label" for="wed2">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="wed3" name="wed3" value="33">
+                      <label class="form-check-label" for="wed3">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="wed4" name="wed4" value="34">
+                      <label class="form-check-label" for="wed4">4</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="wed5" name="wed5" value="35">
+                      <label class="form-check-label" for="wed5">5</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="wed6" name="wed6" value="36">
+                      <label class="form-check-label" for="wed6">6</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="wed7" name="wed7" value="37">
+                      <label class="form-check-label" for="wed7">7</label>
+                    </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <legend class="col-form-label col-sm-2 pt-0">Четверг</legend>
+              <div class="col-sm-10">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="thu1" name="thu1" value="41">
+                      <label class="form-check-label" for="thu1">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="thu2" name="thu2" value="42">
+                      <label class="form-check-label" for="thu2">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="thu3" name="thu3" value="43">
+                      <label class="form-check-label" for="thu3">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="thu4" name="thu4" value="44">
+                      <label class="form-check-label" for="thu4">4</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="thu5" name="thu5" value="45">
+                      <label class="form-check-label" for="thu5">5</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="thu6" name="thu6" value="46">
+                      <label class="form-check-label" for="thu6">6</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="thu7" name="thu7" value="47">
+                      <label class="form-check-label" for="thu7">7</label>
+                    </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <legend class="col-form-label col-sm-2 pt-0">Пятница</legend>
+              <div class="col-sm-10">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="fri1" name="fri1" value="51">
+                      <label class="form-check-label" for="fri1">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="fri2" name="fri2" value="52">
+                      <label class="form-check-label" for="fri2">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="fri3" name="fri3" value="53">
+                      <label class="form-check-label" for="fri3">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="fri4" name="fri4" value="54">
+                      <label class="form-check-label" for="fri4">4</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="fri5" name="fri5" value="55">
+                      <label class="form-check-label" for="fri5">5</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="fri6" name="fri6" value="56">
+                      <label class="form-check-label" for="fri6">6</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="fri7" name="fri7" value="57">
+                      <label class="form-check-label" for="fri7">7</label>
+                    </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <legend class="col-form-label col-sm-2 pt-0">Суббота</legend>
+              <div class="col-sm-10">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="sat1" name="sat1" value="61">
+                      <label class="form-check-label" for="sat1">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="sat2"  name="sat2" value="62">
+                      <label class="form-check-label" for="sat2">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="sat3" name="sat3" value="63">
+                      <label class="form-check-label" for="sat3">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="sat4" name="sat4" value="64">
+                      <label class="form-check-label" for="sat4">4</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="sat5" name="sat5" value="65">
+                      <label class="form-check-label" for="sat5">5</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="sat6" name="sat6" value="66">
+                      <label class="form-check-label" for="sat6">6</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="sat7" name="sat7" value="67">
+                      <label class="form-check-label" for="sat7">7</label>
+                    </div>
+              </div>
+            </div>
 
 
           <hr/>

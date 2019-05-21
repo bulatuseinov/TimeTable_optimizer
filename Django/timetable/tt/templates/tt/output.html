@@ -1,12 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<a>привет</a>
-    <h1>{{windows}}</h1>
+{% extends "base.html" %}
+{% load static %}
 
-</body>
-</html>
+{% block title %}Your timetable{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'tt/css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Ваша группа: {{ group }} </h2>
+    </div>
+    <div class="container">
+        <table class="table table-striped table-bordered">
+            {% include filename %}
+        </table>
+    </div>
+
+{% endblock %}
