@@ -53,6 +53,7 @@ class Inputform(View):
         fri = [request.POST.get(str("fri" + str(i))) for i in range(1, 8)]
         sat = [request.POST.get(str("sat" + str(i))) for i in range(1, 8)]
 
+
         import time
         filename = str(int(time.time() * 10**6))
         filename_path = "tt/static/files/" + filename + ".csv"
@@ -67,9 +68,6 @@ class Inputform(View):
         mond, tues, wedn, thur, frid, satu = list(map(MakeStrFromPairs, [mon, tue, wed, thu, fri, sat]))
 
         pairs = mond + tues + wedn + thur + frid + satu
-
-        if len(pairs) == 0:
-            pairs = "0"
 
         days_1 = [monday, tuesday, wednesday, thursday, friday, saturday]
         days = ''
@@ -96,7 +94,7 @@ class Inputform(View):
             if len(str(days_end)) == 0:
                 days_end = "0"
 
-        subprocess.check_call([r"tt/static/exe/main_doubled", filename_path, group, windows, Knowledge, Skill, Social, Loyality, Total, days, start, end, days_start, days_end, time_t])
+        subprocess.check_call([r"tt/static/exe/main", filename_path, group, windows, Knowledge, Skill, Social, Loyality, Total, days, start, end, days_start, days_end, time_t, pairs])
 
         columns = ['Предмет', 'Преподаватель', 'Ауд.', 'Время']
         df = pd.read_csv(
