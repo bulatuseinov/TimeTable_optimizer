@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.views import View
 import subprocess
 import pandas as pd
-import csv
 
 
 def index(request):
@@ -98,11 +97,13 @@ class Inputform(View):
         columns = ['Предмет', 'Преподаватель', 'Ауд.', 'Время']
         df = pd.read_csv(
             filename_path, sep=";",
-            header=None, names=columns)
+            header=None, names=columns, index_col=False)
         list_days = ["Понедельник"] + [" "]*6 + ["Вторник"] + [" "] *6 + ["Среда"] + [" "] *6 + ["Четверг"] + [" "] *6 + ["Пятница"] + [" "] *6 + ["Суббота"] + [" "] *6
+
         df['День'] = list_days
 
         columns = df.columns.to_list()
+
         columns = columns[-1:] + columns[:-1]
         columns = columns[-1:] + columns[:-1]
         columns[0], columns[1] = columns[1], columns[0]
