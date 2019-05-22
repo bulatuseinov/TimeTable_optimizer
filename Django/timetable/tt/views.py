@@ -102,7 +102,8 @@ class Inputform(View):
 
         df['День'] = list_days
 
-        columns = df.columns.to_list()
+        columns = df.columns.tolist()
+        print(columns)
 
         columns = columns[-1:] + columns[:-1]
         columns = columns[-1:] + columns[:-1]
