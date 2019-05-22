@@ -8,13 +8,23 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container mt-5">
-        <h2>Ваша группа: {{ group }} </h2>
+    <div class="container text-center">
+        <h2 >Ваша группа: {{ group }} </h2>
     </div>
-    <div class="container">
-        <table class="table table-striped table-bordered mb-lg-4">
-            {% include filename %}
-        </table>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm">
+                <h3>Ваше новое расписание:</h3>
+                <table class="table- table-striped table-bordered mb-lg-4 table-sm">
+                    {% include filename %}
+                </table>
+            </div>
+            <div class="col-sm">
+                <h3>Ваше старое расписание:</h3>
+                <table class="table- table-striped table-bordered mb-lg-4 table-sm">
+                    {% include old %}
+                </table>
+            </div>
+        </div>
     </div>
-
 {% endblock %}

@@ -17,7 +17,6 @@ class Inputform(View):
         return render(request, 'tt/input.html', {})
 
     def post(self, request):
-
         group = request.POST.get("group")
         Knowledge = request.POST.get("Knowledge")
         Skill = request.POST.get("Skill")
@@ -46,6 +45,7 @@ class Inputform(View):
         thursday_end = request.POST.get("thursday_end")
         friday_end = request.POST.get("friday_end")
         saturday_end = request.POST.get("saturday_end")
+
         mon = [request.POST.get(str("mon" + str(i))) for i in range(1, 8)]
         tue = [request.POST.get(str("tue" + str(i))) for i in range(1, 8)]
         wed = [request.POST.get(str("wed" + str(i))) for i in range(1, 8)]
@@ -53,10 +53,6 @@ class Inputform(View):
         fri = [request.POST.get(str("fri" + str(i))) for i in range(1, 8)]
         sat = [request.POST.get(str("sat" + str(i))) for i in range(1, 8)]
 
-
-        import time
-        filename = str(int(time.time() * 10**6))
-        filename_path = "tt/static/files/" + filename + ".csv"
 
         def MakeStrFromPairs(day):
             string = ''
@@ -94,13 +90,15 @@ class Inputform(View):
             if len(str(days_end)) == 0:
                 days_end = "0"
 
-        subprocess.check_call([r"tt/static/exe/main", filename_path, group, windows, Knowledge, Skill, Social, Loyality, Total, days, start, end, days_start, days_end, time_t, pairs])
+        import time
+        filename = str(int(time.time() * 10 ** 6))
+        filename_path = "tt/static/files/" + filename + ".csv"
 
+        subprocess.check_call([r"tt/static/exe/main", filename_path, group, windows, Knowledge, Skill, Social, Loyality, Total, days, start, end, days_start, days_end, time_t, pairs])
         columns = ['Предмет', 'Преподаватель', 'Ауд.', 'Время']
         df = pd.read_csv(
             filename_path, sep=";",
             header=None, names=columns)
-
         list_days = ["Понедельник"] + [" "]*6 + ["Вторник"] + [" "] *6 + ["Среда"] + [" "] *6 + ["Четверг"] + [" "] *6 + ["Пятница"] + [" "] *6 + ["Суббота"] + [" "] *6
         df['День'] = list_days
 
@@ -110,9 +108,9 @@ class Inputform(View):
         columns[0], columns[1] = columns[1], columns[0]
         df = df[columns]
         df = df.fillna("-")
-        # df.set_index(["День"], inplace=True)
 
-        filename_html = "tt/templates/tt/" + filename + ".html"
+        filename_html = "tt/templates/tt/" + filename +".html"
+        # filename_html = "tt/templates/tt/" + group + ".html"
         f = open(filename_html, 'w')
         a = df.to_html(justify="center")
         f.write(a)
@@ -124,15 +122,43 @@ class Inputform(View):
         f.writelines([line for line in lines[1:-1]])
         f.close()
 
-
         filename_html_1 = "tt/" + filename + ".html"
+        filename_html_old = "tt/" + group + ".html"
 
         context = {
             "filename" : filename_html_1,
-            "group" : group
+            "old" : filename_html_old,
+            "group" : group,
+            "Knowledge" : Knowledge,
+            "Skill" : Skill,
+            "Social" : Social,
+            "Loyality" : Loyality,
+            "Total" : Total,
+            "monday" : monday,
+            "tuesday" : tuesday,
+            "wednesday" : wednesday,
+            "thursday" : thursday,
+            "friday" : friday,
+            "saturday" : saturday,
+            "windows" : windows,
+            "time_t" : time_t,
+            "start" : start,
+            "monday_star" : monday_start,
+            "tuesday_start" : tuesday_start,
+            "wednesday_start" : wednesday_start,
+            "thursday_start" : thursday_start,
+            "friday_start" : friday_start,
+            "saturday_start" : saturday_start,
+            "end" : end,
+            "monday_end" : monday_end,
+            "tuesday_end" : tuesday_end,
+            "wednesday_end" : wednesday_end,
+            "thursday_end" : thursday_end,
+            "friday_end" : friday_end,
+            "pairs" : pairs
         }
 
-
+        print(filename_path, group, windows, Knowledge, Skill, Social, Loyality, Total, days, start, end, days_start, days_end, time_t, pairs)
 
         return render(request, "tt/output.html", context)
 
