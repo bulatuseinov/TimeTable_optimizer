@@ -97,7 +97,7 @@ class Inputform(View):
         columns = ['Предмет', 'Преподаватель', 'Ауд.', 'Время']
         df = pd.read_csv(
             filename_path, sep=";",
-            header=None, names=columns, index_col=False)
+            header=None, names=columns)
         list_days = ["Понедельник"] + [" "]*6 + ["Вторник"] + [" "] *6 + ["Среда"] + [" "] *6 + ["Четверг"] + [" "] *6 + ["Пятница"] + [" "] *6 + ["Суббота"] + [" "] *6
 
         df['День'] = list_days
@@ -160,7 +160,7 @@ class Inputform(View):
             "pairs" : pairs
         }
 
-        print(filename_path, group, windows, Knowledge, Skill, Social, Loyality, Total, days, start, end, days_start, days_end, time_t, pairs)
+        print("|",filename_path,"|", group,"|", windows,"|", Knowledge,"|", Skill,"|", Social,"|", Loyality,"|", Total,"|", days,"|", start,"|", end,"|", days_start,"|", days_end,"|", time_t, pairs)
 
         return render(request, "tt/output.html", context)
 
