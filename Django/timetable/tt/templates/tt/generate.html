@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Input{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'tt/css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <table class="table- table-striped table-bordered mb-lg-4 table-sm">
+                    {% include table %}
+    </table>
+
+{% endblock %}

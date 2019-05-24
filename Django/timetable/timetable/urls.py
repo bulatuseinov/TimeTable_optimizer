@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from tt.views import index, about
+from tt.views import index, about, generate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
     path('input/', include('tt.urls')),
-    path('about/', about)
+    path('about/', about),
+    path('generate/', generate)
 ]

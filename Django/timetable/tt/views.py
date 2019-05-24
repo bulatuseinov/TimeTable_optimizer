@@ -10,6 +10,45 @@ def index(request):
 def about(request):
     return render(request, 'tt/about.html')
 
+def generate(request):
+    filename = "greg_shit"
+    columns = ['Предмет', 'Преподаватель', 'Ауд.', 'Время']
+    df = pd.read_csv("tt/static/Schedules/greg_shit.csv", sep=";",
+        header=None, names=columns)
+    list_days = ["Понедельник"] + [" "] * 5 + ["Вторник"] + [" "] * 5 + ["Среда"] + [" "] * 5 + ["Четверг"] + [
+        " "] * 5 + ["Пятница"] + [" "] * 5
+
+    df['День'] = list_days
+
+    columns = df.columns.tolist()
+    print(columns)
+
+    columns = columns[-1:] + columns[:-1]
+    columns = columns[-1:] + columns[:-1]
+    columns[0], columns[1] = columns[1], columns[0]
+    df = df[columns]
+    df = df.fillna("-")
+
+    filename_html = "tt/templates/tt/" + filename + ".html"
+    # filename_html = "tt/templates/tt/" + group + ".html"
+    f = open(filename_html, 'w')
+    a = df.to_html(justify="center")
+    f.write(a)
+    f.close()
+    f = open(filename_html)
+    lines = f.readlines()
+    f.close()
+    f = open(filename_html, 'w')
+    f.writelines([line for line in lines[1:-1]])
+    f.close()
+
+    filename_html_1 = "tt/greg_shit.html"
+
+
+    context = {"table" : filename_html_1}
+
+    return render(request, 'tt/generate.html', context)
+
 class Inputform(View):
 
     def get(self, request):
